@@ -28,13 +28,13 @@ app.use("/api/users",userRoutes);
 app.use("/api/posts",postRoutes);
 app.use("/api/notifications",notificationRoutes);
 
-if(process.env.NODE_ENV ==="production"){
-    app.use(express.static(path.join(__dirname,"/Frontend/dist")));
-    app.get("*",(req,res)=>{
-        res.sendFile(path.resolve(__dirname,"Frontend","dist","index.html"));
-    })
-}
+if (process.env.NODE_ENV === "production") {
+	app.use(express.static(path.join(__dirname, "/Frontend/dist")));
 
+	app.get("/(.*)", (req, res) => {
+		res.sendFile(path.resolve(__dirname, "Frontend", "dist", "index.html"));
+	});
+}
 
 app.get("/",(req,res)=>{
     res.send("Server is ready");
